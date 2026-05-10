@@ -1,3 +1,5 @@
+
+const dotenv=require('dotenv').config()
 // Import required packages
 const express = require("express");
 
@@ -14,10 +16,10 @@ const URL = require('./models/url');
 const app = express();
 
 // Server port
-const PORT = 3000;
+const PORT =process.env.PORT ;
 
 // Connect MongoDB database
-connectToMongoDB('mongodb://127.0.0.1:27017/short-url')
+connectToMongoDB(process.env.MONGO_URI)
 .then(() => console.log("mongodb connected successfully"))
 .catch((err) => console.log("Mongo Error", err));
 
