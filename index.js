@@ -1,5 +1,6 @@
 
-const dotenv=require('dotenv').config()
+require('dotenv').config();
+const cors=require('cors')
 // Import required packages
 const express = require("express");
 
@@ -15,16 +16,19 @@ const URL = require('./models/url');
 // Create express app
 const app = express();
 
+
 // Server port
-const PORT =process.env.PORT ;
+const PORT = process.env.PORT || 3000;
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/short-url";
 
 // Connect MongoDB database
-connectToMongoDB(process.env.MONGO_URI)
-.then(() => console.log("mongodb connected successfully"))
-.catch((err) => console.log("Mongo Error", err));
+connectToMongoDB(MONGO_URI)
+  .then(() => console.log("mongodb connected successfully"))
+  .catch((err) => console.log("Mongo Error", err));
 
 // Middleware to read JSON data
 app.use(express.json());
+app.use(cors());
 
 // Base route for URL APIs
 app.use("/url", urlRoute);
