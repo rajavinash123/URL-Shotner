@@ -32,6 +32,9 @@ app.use(cors());
 
 // Base route for URL APIs
 app.use("/url", urlRoute);
+app.get("/", (req, res) => {
+  res.send("Backend Running");
+});
 
 // Redirect route using shortId
 app.get('/:shortid', async (req, res) => {
