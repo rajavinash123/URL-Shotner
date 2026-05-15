@@ -312,16 +312,30 @@ function ShortenerWidget() {
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const generateShortURL = async () => {
+  // const generateShortURL = async () => {
+  //   if (!url.trim()) { setError("Please enter a URL."); return; }
+  //   setLoading(true); setError(""); setShortURL("");
+  //   try {
+  //     const response = await axios.post(`${import.meta.env.VITE_API_URL}/url`, { url });
+  //     setShortURL(`https://url-shotnerme.onrender.com/${response.data.id}`);
+  //   } catch {
+  //     setError("Failed to shorten URL. Please check the server is running.");
+  //   } finally { setLoading(false); }
+  // };
+const generateShortURL = async () => {
     if (!url.trim()) { setError("Please enter a URL."); return; }
     setLoading(true); setError(""); setShortURL("");
+
+    const baseURL = import.meta.env.VITE_API_URL || "http://127.0.0.1:3000"
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/url`, { url });
-      setShortURL(`https://url-shotnerme.onrender.com/${response.data.id}`);
+      const response = await axios.post(`${baseURL}/url`, { url });
+      setShortURL(`${baseURL}/${response.data.id}`);
     } catch {
       setError("Failed to shorten URL. Please check the server is running.");
     } finally { setLoading(false); }
   };
+
 
   const handleCopy = () => {
     navigator.clipboard.writeText(shortURL);

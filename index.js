@@ -28,7 +28,14 @@ connectToMongoDB(MONGO_URI)
 
 // Middleware to read JSON data
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:[
+        "https://url-shotner-amber.vercel.app/",
+        "http://localhost:5173", 
+
+    ],
+    methods:["GET","POST"]
+}));
 
 // Base route for URL APIs
 app.use("/url", urlRoute);
