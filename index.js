@@ -30,11 +30,12 @@ connectToMongoDB(MONGO_URI)
 app.use(express.json());
 app.use(cors({
     origin:[
-        "https://url-shotner-amber.vercel.app/",
-        "http://localhost:5173", 
-
+        "https://url-shotner-amber.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000"
     ],
-    methods:["GET","POST"]
+    methods:["GET","POST"],
+    credentials: true
 }));
 
 // Base route for URL APIs
